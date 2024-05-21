@@ -20,12 +20,12 @@ class LamportClock:
     # Se o clock recebido for maior que o atual, atualiza o clock atual
     # se não, mantém o clock
     if clock_received + 1 > self.clock:
-      print(f"Instância {self.rank} recebeu mensagem e atualizou seu clock de {self.clock} para {clock_received + 1}")
       self.clock = clock_received + 1
+      print(f"Instância {self.rank} recebeu mensagem e atualizou seu clock para {self.clock}")
     else:
       print(f"Instância {self.rank} recebeu mensagem e manteve seu clock em {self.clock}")
 
-  def event(self):
+  def send(self):
     # Envia seu clock para a instância 0
     self.clock += 1
     print(f"Instância {self.rank} enviou uma mensagem com o clock {self.clock}")
@@ -51,4 +51,4 @@ if __name__ == '__main__':
       # Demais instâncias enviam seu clock a cada período de tempo aleatório dentro de um range
       delay = randrange(0, 8)
       sleep(delay)
-      clock.event()
+      clock.send()
