@@ -20,15 +20,15 @@ class LamportClock:
     # Se o clock recebido for maior que o atual, atualiza o clock atual
     # se não, mantém o clock
     if clock_received + 1 > self.clock:
+      print(f"Instância {self.rank} recebeu mensagem e atualizou seu clock de {self.clock} para {clock_received + 1}")
       self.clock = clock_received + 1
-      print("Instância " + str(self.rank) + " atualizou seu clock para " + str(self.clock))
     else:
-      print("Instância " + str(self.rank) + " manteve seu clock em " + str(self.clock))
+      print(f"Instância {self.rank} recebeu mensagem e manteve seu clock em {self.clock}")
 
   def event(self):
     # Envia seu clock para a instância 0
     self.clock += 1
-    print("Instância " + str(self.rank) + " enviou uma mensagem com o clock " + str(self.clock))
+    print(f"Instância {self.rank} enviou uma mensagem com o clock {self.clock}")
     sleep(0.2)
     comm.send(self.clock, dest=0, tag=42)
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
   )
 
   # Sincronizar os processos
-  print("Instância " + str(clock.rank) + " inicializada.")
+  print(f"Instância {clock.rank} inicializada.")
   comm.Barrier()
 
   while True:
