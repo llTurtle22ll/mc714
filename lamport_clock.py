@@ -23,7 +23,7 @@ class LamportClock:
       self.clock = clock_received + 1
       print("Instância " + str(self.rank) + " atualizou seu clock para " + str(self.clock))
     else:
-      print("Instância " + str(self.rank) + " manteve seu clock em" + str(self.clock))
+      print("Instância " + str(self.rank) + " manteve seu clock em " + str(self.clock))
 
   def event(self):
     # Envia seu clock para a instância 0
@@ -50,6 +50,5 @@ if __name__ == '__main__':
     else:
       # Demais instâncias enviam seu clock a cada período de tempo aleatório dentro de um range
       delay = randrange(0, 8)
-      print("Delay da instância " + str(clock.rank) + ": " + str(delay))
       sleep(delay)
       clock.event()
