@@ -24,10 +24,10 @@ if __name__ == '__main__':
     else:
         vizinho_esquerdo = 1
         vizinho_direito = 0
-       
+
     # Inicializar líder desconhecido
     lider_rank = -1
-    lider_prioridade = -1 
+    lider_prioridade = -1
     
     # Sincroniza as instâncias
     print(f"Instância {str(rank)} inicializada com prioridade {str(prioridade)}.")
@@ -53,11 +53,11 @@ if __name__ == '__main__':
             print(f"O melhor candidado é na verdade a instância {str(rank)}, pois tem prioridade {str(prioridade)}")
         else:
             print(f"A instância {str(melhor_rank)} ainda é o melhor candidato, pois sua prioridade é maior que a prioridade da instância {str(rank)}.")
-            # Envia candidato ao vizinho da direita
-            sleep(0.2)
-            comm.send((melhor_rank, melhor_prioridade), dest=vizinho_direito, tag=42)
-            # Espera resultado do vizinho da esquerda
-            (lider_rank, lider_prioridade) = comm.recv(source=vizinho_esquerdo, tag=42)
+        # Envia candidato ao vizinho da direita
+        sleep(0.2)
+        comm.send((melhor_rank, melhor_prioridade), dest=vizinho_direito, tag=42)
+        # Espera resultado do vizinho da esquerda
+        (lider_rank, lider_prioridade) = comm.recv(source=vizinho_esquerdo, tag=42)
         # Envia líder
         if rank != 2:
             comm.send((lider_rank, melhor_prioridade), dest=vizinho_direito, tag=42)
