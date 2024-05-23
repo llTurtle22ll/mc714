@@ -57,11 +57,11 @@ if __name__ == '__main__':
             sleep(0.2)
             comm.send((melhor_rank, melhor_prioridade), dest=vizinho_direito, tag=42)
             # Espera resultado do vizinho da esquerda
-            (leader_rank, leader_priority) = comm.recv(source=vizinho_esquerdo, tag=42)
+            (lider_rank, lider_prioridade) = comm.recv(source=vizinho_esquerdo, tag=42)
         # Envia líder
         if rank != 2:
-            comm.send((leader_rank, melhor_prioridade), dest=vizinho_direito, tag=42)
+            comm.send((lider_rank, melhor_prioridade), dest=vizinho_direito, tag=42)
 
     # Exibir resultado da eleição de líder
-    print(f"A instância {str(rank)} escolheu como líder a instância {str(leader_rank)}")
+    print(f"A instância {str(rank)} escolheu como líder a instância {str(lider_rank)}")
 
